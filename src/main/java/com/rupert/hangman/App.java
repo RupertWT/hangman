@@ -2,7 +2,7 @@ package com.rupert.hangman;
 
 /**
  * Hello world!
- *
+ * Bye Bye world!
  */
 public class App 
 {
