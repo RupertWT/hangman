@@ -1,17 +1,22 @@
 package com.rupert.hangman;
 
-/**
- * Hello world!
- * Bye Bye world!
- */
-public class HangmanLogic 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import java.util.ArrayList;
 
+public class HangmanLogic {
+    
+	public boolean won = false;
+	
+	public ArrayList<Integer> main( String word , String letter ) {
+
+		ArrayList<Integer> resultList = new ArrayList<Integer>();
+		
+		for (int i = 0; i < word.length(); i++) {
+			
+			if (word.substring(i,i+1).equalsIgnoreCase(letter)) {
+				resultList.add(i);
+			}
+		}
+		return resultList;
     }
-    
-    
     
 }
