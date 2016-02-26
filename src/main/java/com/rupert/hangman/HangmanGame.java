@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -24,6 +25,7 @@ public class HangmanGame {
 
     public DetailsPanel myPanel;
     public static JLabel label;
+    public static JLabel hidans;
     public static String HiddenAnswer = "";
     public static String Answer = "";
 
@@ -34,6 +36,7 @@ public class HangmanGame {
         JPanel content = new JPanel(new BorderLayout());
         content.add(new ImagePane());
         
+//      Find a word for the game
         gameWord();
        
         content.add(new GuessPane(), BorderLayout.SOUTH);
@@ -47,8 +50,6 @@ public class HangmanGame {
         myframe.setLocationRelativeTo(null);
         myframe.setVisible(true);
     }
-
-
 
 	public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -86,11 +87,10 @@ public class HangmanGame {
     public static class GuessPane extends JPanel {
 
         public GuessPane() {
-            MaskFormatter formatter = null;
-            JLabel label = new JLabel(HiddenAnswer);
-//          JLabel ans = new JLabel(Answer);
-			add(label);
-//			add(ans);
+            hidans = new JLabel(HiddenAnswer);
+            add(hidans);	
+//            JLabel ans = new JLabel(Answer);
+//            add(ans);
         }
 
     }
@@ -136,8 +136,14 @@ public class HangmanGame {
     
     public static void play(String letter) {
 	 	
+    	HangmanLogic logic = new HangmanLogic();
+    	ArrayList<Integer> list = new ArrayList<Integer>();
+    	list = logic.main(Answer, letter);
+    	System.out.println(list);
+    	hidans.setText("Bugger");
+    	
     	try {
-             label.setIcon(new ImageIcon(ImageIO.read(HangmanGame.class.getResource("/2.png"))));
+             label.setIcon(new ImageIcon(ImageIO.read(HangmanGame.class.getResource("/8.png"))));
          } catch (IOException ex) {
              label.setText("Bad Image");
              ex.printStackTrace();
