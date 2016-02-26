@@ -1,7 +1,5 @@
 package com.rupert.hangman;
 
-//2016-02-25
-
 import java.util.ArrayList;
 
 public class HangmanLogic {
