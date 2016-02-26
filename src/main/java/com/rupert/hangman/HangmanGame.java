@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -26,6 +27,7 @@ public class HangmanGame {
     public static JLabel hidans;
     public static String HiddenAnswer = "";
     public static String Answer = "";
+    public static int count = 1;
 
     public HangmanGame() throws ParseException {
         myPanel = new DetailsPanel();
@@ -97,7 +99,7 @@ public class HangmanGame {
 
         public DetailsPanel() {
             setLayout(new BorderLayout());
-            setBorder(BorderFactory.createTitledBorder(" click here "));
+            setBorder(BorderFactory.createTitledBorder(" Click here "));
 
             JPanel letterPanel = new JPanel(new GridLayout(0, 5));
             for (char alphabet = 'A'; alphabet <= 'Z'; alphabet++) {
@@ -120,9 +122,10 @@ public class HangmanGame {
   
     
     
-    private void gameWord() {
+    private static void gameWord() {
         HangmanWords word = new HangmanWords();
 		Answer = word.main();
+//      Answer = "Awesome";
 						
 		for(int i = 0; i < Answer.length(); i++) {
 			HiddenAnswer = HiddenAnswer + "?";
@@ -132,21 +135,62 @@ public class HangmanGame {
     
     
     
-    public static void play(String letter) {
-	 	
+    private static void play(String letter) {	 	
     	HangmanLogic logic = new HangmanLogic();
     	ArrayList<Integer> list = new ArrayList<Integer>();
-    	list = logic.main(Answer, letter);
-    	System.out.println(list);
-    	hidans.setText("Bugger");
+    	list = logic.main(Answer, letter);	
     	
-    	try {
-             label.setIcon(new ImageIcon(ImageIO.read(HangmanGame.class.getResource("/8.png"))));
-         } catch (IOException ex) {
-             label.setText("Bad Image");
-             ex.printStackTrace();
-         }
-    
+    	if (list.size() == 0) {
+    		wrongGuess();
+    	}
+    	
+    	if (list.size() > 0) {
+	    	for (int i = 0; i < list.size(); i++) {
+	    		char c = letter.charAt(0);
+	    		
+	            StringBuffer buf = new StringBuffer(HiddenAnswer);
+	            buf.setCharAt(list.get(i), c);
+	            HiddenAnswer = buf.toString();
+	    		
+	    		hidans.setText(HiddenAnswer);
+	    	}
+    	}
+    	
+    	if (HiddenAnswer.indexOf("?")==-1) {
+    		win();
+    	}
+    	
     }
+
+	private static void wrongGuess() {
+		count = count + 1;
+    	try {
+            label.setIcon(new ImageIcon(ImageIO.read(HangmanGame.class.getResource("/" + count + ".png"))));
+        } catch (IOException ex) {
+            label.setText("Bad Image");
+            ex.printStackTrace();
+        }
+		
+    	if (count == 8) {
+    		lose();
+    	}
+    	
+	}
+
+	private static void lose() {
+		if(JOptionPane.showConfirmDialog(new JFrame("You lost!"), "You lost fool!") == JOptionPane.OK_OPTION) {
+			System.exit(0);
+		} else {
+			System.exit(0);
+		}
+	}
+	
+	private static void win() {
+		if(JOptionPane.showConfirmDialog(new JFrame("You won!"), "You won genius!") == JOptionPane.OK_OPTION) {
+			System.exit(0);
+		} else {
+			System.exit(0);
+		}	
+	}
     
 }

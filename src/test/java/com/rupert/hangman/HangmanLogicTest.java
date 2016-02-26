@@ -33,4 +33,10 @@ public class HangmanLogicTest {
 		assertEquals(expected, logic.main("Awesome","E")); 
     }
 	
+	@Test
+    public void capitalLetterEReturns2SizeArrayList()
+    {
+		assertEquals(2, logic.main("Awesome","E").size()); 
+    }
+	
 }
