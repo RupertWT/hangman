@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class HangmanGame {
 
@@ -34,25 +35,23 @@ public class HangmanGame {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
 
-	public void init_icons() {
-		
 		try{
-			Image x = ImageIO.read(HangmanGame.class.getResource("/x.png"));
-			Image o = ImageIO.read(HangmanGame.class.getResource("/o.png"));
+			Image a = ImageIO.read(HangmanGame.class.getResource("/1.png"));
+			Image b = ImageIO.read(HangmanGame.class.getResource("/2.png"));
+			Image c = ImageIO.read(HangmanGame.class.getResource("/3.png"));
+			Image d = ImageIO.read(HangmanGame.class.getResource("/4.png"));
+			Image e = ImageIO.read(HangmanGame.class.getResource("/5.png"));
+			Image f = ImageIO.read(HangmanGame.class.getResource("/6.png"));
+			Image g = ImageIO.read(HangmanGame.class.getResource("/7.png"));
+			Image h = ImageIO.read(HangmanGame.class.getResource("/8.png"));	
 			
-//			xIcon = new ImageIcon(x.getScaledInstance(grid[0].getWidth(), grid[0].getHeight(),Image.SCALE_SMOOTH));
-//			oIcon = new ImageIcon(o.getScaledInstance(grid[0].getWidth(), grid[0].getHeight(),Image.SCALE_SMOOTH));
-//			
-//			for(int i=0; i<9; i++) {
-//				if (grid[i].getIcon() != null) 
-//						grid[i].setIcon(board[i] == 1 ? xIcon : oIcon);
-//			}
-			
+			JLabel picLabel = new JLabel(new ImageIcon(a.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH)));
+						
 		}catch(IOException ex) {
 			ex.printStackTrace();
 		}
+ 		
 	}
 	
 }
