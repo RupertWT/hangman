@@ -89,8 +89,8 @@ public class HangmanGame {
         public GuessPane() {
             hidans = new JLabel(HiddenAnswer);
             add(hidans);	
-//            JLabel ans = new JLabel(Answer);
-//            add(ans);
+//          JLabel ans = new JLabel(Answer);
+//          add(ans);
         }
 
     }
@@ -104,12 +104,13 @@ public class HangmanGame {
             JPanel letterPanel = new JPanel(new GridLayout(0, 5));
             for (char alphabet = 'A'; alphabet <= 'Z'; alphabet++) {
                 String buttonText = String.valueOf(alphabet);
+                
                 final JButton letterButton = new JButton(buttonText);
                 letterButton.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent ae) {
                 		String actionCommand = ae.getActionCommand();
                         System.out.println("actionCommand is: " + actionCommand);
-                		letterButton.setEnabled(false);
+                		//letterButton.setEnabled(false);
                 		play(actionCommand);
                      }
                 });
@@ -178,19 +179,38 @@ public class HangmanGame {
 	}
 
 	private static void lose() {
-		if(JOptionPane.showConfirmDialog(new JFrame("You lost!"), "You lost fool!") == JOptionPane.OK_OPTION) {
-			System.exit(0);
+		if(JOptionPane.showConfirmDialog(new JFrame("You lost!"), "You lost fool! The answer was '" + Answer + "'! Do you want to play again?") == JOptionPane.YES_OPTION) {
+			reset();
 		} else {
 			System.exit(0);
 		}
 	}
 	
 	private static void win() {
-		if(JOptionPane.showConfirmDialog(new JFrame("You won!"), "You won genius!") == JOptionPane.OK_OPTION) {
-			System.exit(0);
+		if(JOptionPane.showConfirmDialog(new JFrame("You won!"), "You won genius! Do you want to play again?") == JOptionPane.YES_OPTION) {
+			reset();
 		} else {
 			System.exit(0);
 		}	
+	}
+
+	private static void reset() {
+		HiddenAnswer = "";
+		Answer = "";
+		count = 1;
+		
+		try {
+            label.setIcon(new ImageIcon(ImageIO.read(HangmanGame.class.getResource("/1.png"))));
+        } catch (IOException ex) {
+            label.setText("Bad Image");
+            ex.printStackTrace();
+        }
+		
+		
+		
+		gameWord();
+		hidans.setText(HiddenAnswer);
+
 	}
     
 }

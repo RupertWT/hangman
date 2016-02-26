@@ -13,7 +13,7 @@ public class HangmanWords {
    
 		int random = (int)(Math.random() * 30 + 1 );
 		String word = words[random];
-		System.out.println(word);
+//		System.out.println(word);
 		return word;
 		
 	}
