@@ -28,6 +28,8 @@ public class HangmanGame {
     public static String HiddenAnswer = "";
     public static String Answer = "";
     public static int count = 1;
+    public static boolean loserGeorgeRules = false;
+    public static int consecutiveGuesses = 0;
 
     public HangmanGame() throws ParseException {
         myPanel = new DetailsPanel();
@@ -126,16 +128,14 @@ public class HangmanGame {
     private static void gameWord() {
         HangmanWords word = new HangmanWords();
 		Answer = word.main();
-//      Answer = "Awesome";
+		Answer = "Awesome";
 						
 		for(int i = 0; i < Answer.length(); i++) {
 			HiddenAnswer = HiddenAnswer + "?";
 		}
 		
 	}  
-    
-    
-    
+        
     private static void play(String letter) {	 	
     	HangmanLogic logic = new HangmanLogic();
     	ArrayList<Integer> list = new ArrayList<Integer>();
@@ -155,6 +155,12 @@ public class HangmanGame {
 	    		
 	    		hidans.setText(HiddenAnswer);
 	    	}
+	    	
+	    	if (loserGeorgeRules) {
+	    		consecutiveGuesses++;
+	    		twoConsecutiveGuesses();
+	    	}
+	    	
     	}
     	
     	if (HiddenAnswer.indexOf("?")==-1) {
@@ -162,9 +168,24 @@ public class HangmanGame {
     	}
     	
     }
-
+    
+    private static void twoConsecutiveGuesses() {
+    	if (consecutiveGuesses == 2) {
+    		count = count - 1;
+    		
+        	try {
+                label.setIcon(new ImageIcon(ImageIO.read(HangmanGame.class.getResource("/" + count + ".png"))));
+            } catch (IOException ex) {
+                label.setText("Bad Image");
+                ex.printStackTrace();
+            }
+    		
+    	}
+    }
+    
 	private static void wrongGuess() {
 		count = count + 1;
+		consecutiveGuesses = 0;
     	try {
             label.setIcon(new ImageIcon(ImageIO.read(HangmanGame.class.getResource("/" + count + ".png"))));
         } catch (IOException ex) {
@@ -198,6 +219,7 @@ public class HangmanGame {
 		HiddenAnswer = "";
 		Answer = "";
 		count = 1;
+		consecutiveGuesses = 0;
 		
 		try {
             label.setIcon(new ImageIcon(ImageIO.read(HangmanGame.class.getResource("/1.png"))));
