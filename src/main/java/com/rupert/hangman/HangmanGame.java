@@ -99,11 +99,6 @@ public class HangmanGame {
 
     public static class DetailsPanel extends JPanel {
 
-        /**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
 		public DetailsPanel() {
             setLayout(new BorderLayout());
             setBorder(BorderFactory.createTitledBorder(" Click here "));
@@ -117,8 +112,8 @@ public class HangmanGame {
                 	public void actionPerformed(ActionEvent ae) {
                 		String actionCommand = ae.getActionCommand();
                         System.out.println("actionCommand is: " + actionCommand);
-                        System.out.println("X is: " + letterButton.getX());
-                        System.out.println("Y is: " + letterButton.getY());
+//                        System.out.println("X is: " + letterButton.getX());
+//                        System.out.println("Y is: " + letterButton.getY());
 //                		letterButton.setEnabled(false);
                 		play(actionCommand);
                      }
