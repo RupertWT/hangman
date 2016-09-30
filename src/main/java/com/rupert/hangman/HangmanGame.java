@@ -99,7 +99,12 @@ public class HangmanGame {
 
     public static class DetailsPanel extends JPanel {
 
-        public DetailsPanel() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public DetailsPanel() {
             setLayout(new BorderLayout());
             setBorder(BorderFactory.createTitledBorder(" Click here "));
 
@@ -112,6 +117,8 @@ public class HangmanGame {
                 	public void actionPerformed(ActionEvent ae) {
                 		String actionCommand = ae.getActionCommand();
                         System.out.println("actionCommand is: " + actionCommand);
+                        System.out.println("X is: " + letterButton.getX());
+                        System.out.println("Y is: " + letterButton.getY());
 //                		letterButton.setEnabled(false);
                 		play(actionCommand);
                      }
@@ -170,8 +177,13 @@ public class HangmanGame {
     }
     
     private static void twoConsecutiveGuesses() {
+    	    	
     	if (consecutiveGuesses == 2) {
     		count = count - 1;
+    		
+    		if (count < 1) {
+    			count = 1;
+    		}
     		
         	try {
                 label.setIcon(new ImageIcon(ImageIO.read(HangmanGame.class.getResource("/" + count + ".png"))));
