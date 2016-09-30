@@ -135,7 +135,7 @@ public class HangmanGame {
     private static void gameWord() {
         HangmanWords word = new HangmanWords();
 		Answer = word.main();
-		Answer = "Awesome";
+//		Answer = "Awesome";
 						
 		for(int i = 0; i < Answer.length(); i++) {
 			HiddenAnswer = HiddenAnswer + "?";
