@@ -22,7 +22,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class HangmanGame {
 
-    public DetailsPanel myPanel;
+    public static DetailsPanel myPanel;
     public static JLabel label;
     public static JLabel hidans;
     public static String HiddenAnswer = "";
@@ -110,7 +110,7 @@ public class HangmanGame {
                 	public void actionPerformed(ActionEvent ae) {
                 		String actionCommand = ae.getActionCommand();
                         System.out.println("actionCommand is: " + actionCommand);
-                		//letterButton.setEnabled(false);
+//                		letterButton.setEnabled(false);
                 		play(actionCommand);
                      }
                 });
@@ -205,8 +205,6 @@ public class HangmanGame {
             label.setText("Bad Image");
             ex.printStackTrace();
         }
-		
-		
 		
 		gameWord();
 		hidans.setText(HiddenAnswer);
